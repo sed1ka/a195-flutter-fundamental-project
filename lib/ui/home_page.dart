@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dicoding_news_app/common/styles.dart';
 import 'package:dicoding_news_app/data/api/api_service.dart';
 import 'package:dicoding_news_app/provider/news_provider.dart';
 import 'package:dicoding_news_app/ui/article_list_page.dart';
@@ -12,23 +13,25 @@ import 'package:provider/provider.dart';
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
 
+  const HomePage({Key? key}) : super(key: key);
+
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   int _bottomNavIndex = 0;
   static const String _headlineText = 'Headline';
 
-  List<Widget> _listWidget = [
+  final List<Widget> _listWidget = [
     ChangeNotifierProvider<NewsProvider>(
       create: (_) => NewsProvider(apiService: ApiService()),
-      child: ArticleListPage(),
+      child: const ArticleListPage(),
     ),
-    SettingsPage(),
+    const SettingsPage(),
   ];
 
-  List<BottomNavigationBarItem> _bottomNavBarItems = [
+  final List<BottomNavigationBarItem> _bottomNavBarItems = [
     BottomNavigationBarItem(
       icon: Icon(Platform.isIOS ? CupertinoIcons.news : Icons.public),
       label: _headlineText,
@@ -49,6 +52,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _listWidget[_bottomNavIndex],
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: secondaryColor,
         currentIndex: _bottomNavIndex,
         items: _bottomNavBarItems,
         onTap: _onBottomNavTapped,
@@ -58,7 +62,10 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildIos(BuildContext context) {
     return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(items: _bottomNavBarItems),
+      tabBar: CupertinoTabBar(
+        items: _bottomNavBarItems,
+        activeColor: secondaryColor,
+      ),
       tabBuilder: (context, index) {
         return _listWidget[index];
       },

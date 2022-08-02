@@ -5,18 +5,23 @@ import 'package:flutter/material.dart';
 class CustomScaffold extends StatelessWidget {
   final Widget body;
 
-  CustomScaffold({required this.body});
+  const CustomScaffold({Key? key, required this.body}) : super(key: key);
 
   Widget _buildShortAppBar(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(0),
+      margin: const EdgeInsets.all(0),
+      shape: const BeveledRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(16.0),
+        ),
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
             icon: defaultTargetPlatform == TargetPlatform.iOS
-                ? Icon(CupertinoIcons.back)
-                : Icon(Icons.arrow_back),
+                ? const Icon(CupertinoIcons.back)
+                : const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -29,11 +34,6 @@ class CustomScaffold extends StatelessWidget {
             ),
           ),
         ],
-      ),
-      shape: BeveledRectangleBorder(
-        borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(16.0),
-        ),
       ),
     );
   }

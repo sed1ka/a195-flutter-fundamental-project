@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ArticleListPage extends StatelessWidget {
+  const ArticleListPage({Key? key}) : super(key: key);
+
   Widget _buildList() {
     return Consumer<NewsProvider>(
       builder: (context, state, _) {
-        if (state.state == ResultState.Loading) {
-          return Center(child: CircularProgressIndicator());
-        } else if (state.state == ResultState.HasData) {
+        if (state.state == ResultState.loading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state.state == ResultState.hasData) {
           return ListView.builder(
             shrinkWrap: true,
             itemCount: state.result.articles.length,
@@ -20,12 +22,24 @@ class ArticleListPage extends StatelessWidget {
               return CardArticle(article: article);
             },
           );
-        } else if (state.state == ResultState.NoData) {
-          return Center(child: Text(state.message));
-        } else if (state.state == ResultState.Error) {
-          return Center(child: Text(state.message));
+        } else if (state.state == ResultState.noData) {
+          return Center(
+            child: Material(
+              child: Text(state.message),
+            ),
+          );
+        } else if (state.state == ResultState.error) {
+          return Center(
+            child: Material(
+              child: Text(state.message),
+            ),
+          );
         } else {
-          return Center(child: Text(''));
+          return const Center(
+            child: Material(
+              child: Text(''),
+            ),
+          );
         }
       },
     );
@@ -34,7 +48,7 @@ class ArticleListPage extends StatelessWidget {
   Widget _buildAndroid(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('News App'),
+        title: const Text('News App'),
       ),
       body: _buildList(),
     );
@@ -42,7 +56,7 @@ class ArticleListPage extends StatelessWidget {
 
   Widget _buildIos(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
+      navigationBar: const CupertinoNavigationBar(
         middle: Text('News App'),
         transitionBetweenRoutes: false,
       ),
