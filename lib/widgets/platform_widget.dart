@@ -5,12 +5,15 @@ class PlatformWidget extends StatelessWidget {
   final WidgetBuilder androidBuilder;
   final WidgetBuilder iosBuilder;
 
-  PlatformWidget({required this.androidBuilder, required this.iosBuilder});
+  const PlatformWidget(
+      {Key? key, required this.androidBuilder, required this.iosBuilder})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
+        return iosBuilder(context);
         return androidBuilder(context);
       case TargetPlatform.iOS:
         return iosBuilder(context);

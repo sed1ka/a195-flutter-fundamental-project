@@ -1,13 +1,13 @@
 class ArticlesResult {
+  final String status;
+  final int totalResults;
+  final List<Article> articles;
+
   ArticlesResult({
     required this.status,
     required this.totalResults,
     required this.articles,
   });
-
-  String status;
-  int totalResults;
-  List<Article> articles;
 
   factory ArticlesResult.fromJson(Map<String, dynamic> json) => ArticlesResult(
         status: json["status"],
