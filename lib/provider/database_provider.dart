@@ -21,10 +21,10 @@ class DatabaseProvider extends ChangeNotifier {
 
   void _getBookmarks() async {
     _bookmarks = await databaseHelper.getBookmarks();
-    if (_bookmarks.length > 0) {
-      _state = ResultState.HasData;
+    if (_bookmarks.isNotEmpty) {
+      _state = ResultState.hasData;
     } else {
-      _state = ResultState.NoData;
+      _state = ResultState.noData;
       _message = 'Empty Data';
     }
     notifyListeners();
@@ -35,7 +35,7 @@ class DatabaseProvider extends ChangeNotifier {
       await databaseHelper.insertBookmark(article);
       _getBookmarks();
     } catch (e) {
-      _state = ResultState.Error;
+      _state = ResultState.error;
       _message = 'Error: $e';
       notifyListeners();
     }
@@ -51,7 +51,7 @@ class DatabaseProvider extends ChangeNotifier {
       await databaseHelper.removeBookmark(url);
       _getBookmarks();
     } catch (e) {
-      _state = ResultState.Error;
+      _state = ResultState.error;
       _message = 'Error: $e';
       notifyListeners();
     }

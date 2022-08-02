@@ -8,7 +8,7 @@ final ReceivePort port = ReceivePort();
 
 class BackgroundService {
   static BackgroundService? _instance;
-  static String _isolateName = 'isolate';
+  static const String _isolateName = 'isolate';
   static SendPort? _uiSendPort;
 
   BackgroundService._internal() {
@@ -26,9 +26,9 @@ class BackgroundService {
 
   static Future<void> callback() async {
     print('Alarm fired!');
-    final NotificationHelper _notificationHelper = NotificationHelper();
+    final NotificationHelper notificationHelper = NotificationHelper();
     var result = await ApiService().topHeadlines();
-    await _notificationHelper.showNotification(
+    await notificationHelper.showNotification(
         flutterLocalNotificationsPlugin, result);
 
     _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);

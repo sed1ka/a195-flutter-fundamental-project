@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final Color primaryColor = Color(0xFFFFFFFF);
-final Color secondaryColor = Color(0xFF6B38FB);
-final Color darkPrimaryColor = Color(0xFF000000);
-final Color darkSecondaryColor = Color(0xff64ffda);
+const Color primaryColor = Color(0xFFFFFFFF);
+const Color secondaryColor = Color(0xFF6B38FB);
+const Color darkPrimaryColor = Color(0xFF000000);
+const Color darkSecondaryColor = Color(0xff64ffda);
 
 final TextTheme myTextTheme = TextTheme(
   headline1: GoogleFonts.merriweather(
@@ -44,17 +44,13 @@ ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: Colors.white,
   visualDensity: VisualDensity.adaptivePlatformDensity,
   textTheme: myTextTheme,
-  appBarTheme: AppBarTheme(elevation: 0),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    selectedItemColor: secondaryColor,
-    unselectedItemColor: Colors.grey,
-  ),
+  appBarTheme: const AppBarTheme(elevation: 0),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       primary: secondaryColor,
       onPrimary: Colors.white,
-      textStyle: TextStyle(),
-      shape: RoundedRectangleBorder(
+      textStyle: const TextStyle(),
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(0),
         ),
@@ -71,19 +67,15 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
       ),
   visualDensity: VisualDensity.adaptivePlatformDensity,
   textTheme: myTextTheme,
-  appBarTheme: AppBarTheme(elevation: 0),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    selectedItemColor: darkSecondaryColor,
-    unselectedItemColor: Colors.grey,
-  ),
+  appBarTheme: const AppBarTheme(elevation: 0),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       primary: secondaryColor,
       onPrimary: Colors.white,
-      textStyle: TextStyle(),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(0),
+      textStyle: const TextStyle(),
+      shape: const RoundedRectangleBorder(
+        borderRadius:  BorderRadius.all(
+         Radius.circular(0),
         ),
       ),
     ),

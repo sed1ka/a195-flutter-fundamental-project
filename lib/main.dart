@@ -26,20 +26,22 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final NotificationHelper _notificationHelper = NotificationHelper();
-  final BackgroundService _service = BackgroundService();
+  final NotificationHelper notificationHelper = NotificationHelper();
+  final BackgroundService service = BackgroundService();
 
-  _service.initializeIsolate();
+  service.initializeIsolate();
 
   if (Platform.isAndroid) {
     await AndroidAlarmManager.initialize();
   }
-  await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
+  await notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -78,7 +80,7 @@ class MyApp extends StatelessWidget {
             navigatorKey: navigatorKey,
             initialRoute: HomePage.routeName,
             routes: {
-              HomePage.routeName: (context) => HomePage(),
+              HomePage.routeName: (context) => const HomePage(),
               ArticleDetailPage.routeName: (context) => ArticleDetailPage(
                     article:
                         ModalRoute.of(context)?.settings.arguments as Article,

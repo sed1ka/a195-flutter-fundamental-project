@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class CardArticle extends StatelessWidget {
   final Article article;
 
-  const CardArticle({required this.article});
+  const CardArticle({Key? key, required this.article}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +35,13 @@ class CardArticle extends StatelessWidget {
                 subtitle: Text(article.author ?? ""),
                 trailing: isBookmarked
                     ? IconButton(
-                        icon: Icon(Icons.bookmark),
-                        color: Theme.of(context).accentColor,
+                        icon: const Icon(Icons.bookmark),
+                        color: Theme.of(context).colorScheme.secondary,
                         onPressed: () => provider.removeBookmark(article.url),
                       )
                     : IconButton(
-                        icon: Icon(Icons.bookmark_border),
-                        color: Theme.of(context).accentColor,
+                        icon: const Icon(Icons.bookmark_border),
+                        color: Theme.of(context).colorScheme.secondary,
                         onPressed: () => provider.addBookmark(article),
                       ),
                 onTap: () => Navigation.intentWithData(

@@ -18,9 +18,9 @@ class NotificationHelper {
   Future<void> initNotifications(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     var initializationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
+        const AndroidInitializationSettings('app_icon');
 
-    var initializationSettingsIOS = IOSInitializationSettings(
+    var initializationSettingsIOS = const IOSInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
       requestSoundPermission: false,
@@ -32,7 +32,7 @@ class NotificationHelper {
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: (String? payload) async {
       if (payload != null) {
-        print('notification payload: ' + payload);
+        print('notification payload: $payload');
       }
       selectNotificationSubject.add(payload ?? 'empty payload');
     });
@@ -41,18 +41,19 @@ class NotificationHelper {
   Future<void> showNotification(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
       ArticlesResult articles) async {
-    var _channelId = "1";
-    var _channelName = "channel_01";
-    var _channelDescription = "dicoding news channel";
+    var channelId = "1";
+    var channelName = "channel_01";
+    var channelDescription = "dicoding news channel";
 
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        _channelId, _channelName, _channelDescription,
+        channelId, channelName,
+        channelDescription: channelDescription,
         importance: Importance.max,
         priority: Priority.high,
         ticker: 'ticker',
-        styleInformation: DefaultStyleInformation(true, true));
+        styleInformation: const DefaultStyleInformation(true, true));
 
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         android: androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics);

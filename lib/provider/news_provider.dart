@@ -24,20 +24,20 @@ class NewsProvider extends ChangeNotifier {
 
   Future<dynamic> _fetchAllArticle() async {
     try {
-      _state = ResultState.Loading;
+      _state = ResultState.loading;
       notifyListeners();
       final article = await apiService.topHeadlines();
       if (article.articles.isEmpty) {
-        _state = ResultState.NoData;
+        _state = ResultState.noData;
         notifyListeners();
         return _message = 'Empty Data';
       } else {
-        _state = ResultState.HasData;
+        _state = ResultState.hasData;
         notifyListeners();
         return _articlesResult = article;
       }
     } catch (e) {
-      _state = ResultState.Error;
+      _state = ResultState.error;
       notifyListeners();
       return _message = 'Error --> $e';
     }
