@@ -20,7 +20,7 @@ class NotificationHelper {
     var initializationSettingsAndroid =
         const AndroidInitializationSettings('app_icon');
 
-    var initializationSettingsIOS = const IOSInitializationSettings(
+    var initializationSettingsIOS = const DarwinInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
       requestSoundPermission: false,
@@ -29,13 +29,16 @@ class NotificationHelper {
     var initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: (String? payload) async {
-      if (payload != null) {
-        print('notification payload: $payload');
-      }
-      selectNotificationSubject.add(payload ?? 'empty payload');
-    });
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (details) {
+        final payload = details.payload;
+        if (payload != null) {
+          print('notification payload: $payload');
+        }
+        selectNotificationSubject.add(payload ?? 'empty payload');
+      },
+    );
   }
 
   Future<void> showNotification(
@@ -53,10 +56,11 @@ class NotificationHelper {
         ticker: 'ticker',
         styleInformation: const DefaultStyleInformation(true, true));
 
-    var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
+    var iOSPlatformChannelSpecifics = const DarwinNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics,
-        iOS: iOSPlatformChannelSpecifics);
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
+    );
 
     var titleNotification = "<b>Headline News</b>";
     var titleNews = articles.articles[0].title;
