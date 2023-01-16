@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:dicoding_news_app/common/navigation.dart';
 import 'package:dicoding_news_app/data/model/article.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -32,7 +33,7 @@ class NotificationHelper {
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: (String? payload) async {
       if (payload != null) {
-        print('notification payload: $payload');
+        log('notification payload: $payload');
       }
       selectNotificationSubject.add(payload ?? 'empty payload');
     });

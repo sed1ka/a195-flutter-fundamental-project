@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'dart:isolate';
 import 'package:dicoding_news_app/main.dart';
@@ -25,7 +26,7 @@ class BackgroundService {
   }
 
   static Future<void> callback() async {
-    print('Alarm fired!');
+    log('Alarm fired!');
     final NotificationHelper notificationHelper = NotificationHelper();
     var result = await ApiService().topHeadlines();
     await notificationHelper.showNotification(

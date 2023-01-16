@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:dicoding_news_app/utils/background_service.dart';
 import 'package:dicoding_news_app/utils/date_time_helper.dart';
@@ -11,7 +13,7 @@ class SchedulingProvider extends ChangeNotifier {
   Future<bool> scheduledNews(bool value) async {
     _isScheduled = value;
     if (_isScheduled) {
-      print('Scheduling News Activated');
+      log('Scheduling News Activated');
       notifyListeners();
       return await AndroidAlarmManager.periodic(
         const Duration(hours: 24),
@@ -22,7 +24,7 @@ class SchedulingProvider extends ChangeNotifier {
         wakeup: true,
       );
     } else {
-      print('Scheduling News Canceled');
+      log('Scheduling News Canceled');
       notifyListeners();
       return await AndroidAlarmManager.cancel(1);
     }

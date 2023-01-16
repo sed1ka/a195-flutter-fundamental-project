@@ -47,8 +47,8 @@ ThemeData lightTheme = ThemeData(
   appBarTheme: const AppBarTheme(elevation: 0),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      primary: secondaryColor,
-      onPrimary: Colors.white,
+      backgroundColor: secondaryColor,
+      foregroundColor: Colors.white,
       textStyle: const TextStyle(),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
@@ -70,8 +70,8 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
   appBarTheme: const AppBarTheme(elevation: 0),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      primary: secondaryColor,
-      onPrimary: Colors.white,
+      backgroundColor: secondaryColor,
+      foregroundColor: Colors.white,
       textStyle: const TextStyle(),
       shape: const RoundedRectangleBorder(
         borderRadius:  BorderRadius.all(
