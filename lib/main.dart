@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         NewsListPage.routeName: (context) => const NewsListPage(),
         ArticleDetailPage.routeName: (context) => ArticleDetailPage(
               article: ModalRoute.of(context)?.settings.arguments as Article,
+              
             ),
         ArticleWebView.routeName: (context) => ArticleWebView(
               url: ModalRoute.of(context)?.settings.arguments as String,
@@ -71,8 +72,12 @@ class NewsListPage extends StatelessWidget {
       title: Text(article.title),
       subtitle: Text(article.author),
       onTap: () {
-        Navigator.pushNamed(context, ArticleDetailPage.routeName,
-            arguments: article);
+        Navigator.pushNamed(
+          context,
+          ArticleDetailPage.routeName,
+          arguments: article,
+
+        );
       },
     );
   }
